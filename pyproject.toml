@@ -1,0 +1,28 @@
+[project]
+name = "ComputePodSimpleHttpReloadServer"
+version = "0.0.1"
+description = "A very simple reloading Http server using SSE Starlette and Hypercorn."
+authors = [
+    {name = "Stephen Gaito", email = "stephen@perceptisys.co.uk"},
+]
+dependencies = [
+    "hypercorn~=0.11",
+    "sse-starlette~=0.7",
+]
+requires-python = ">=3.9"
+dynamic = ["classifiers"]
+license = {text = "Apache-2.0"}
+
+[project.urls]
+homepage = "https://github.com/computePods/asyncWatchDo"
+
+[project.scripts]
+cphttp = "cphttp:cphttp"
+
+[project.optional-dependencies]
+[build-system]
+requires = ["pdm-pep517"]
+build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]

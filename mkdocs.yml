@@ -1,0 +1,15 @@
+site_name: ComputePods Simple reloading HTTP server
+
+site_url: https://computepods.github.io/simpleHttpReloadServer/
+
+repo_url: https://github.com/computePods/simpleHttpReloadServer
+
+plugins:
+  - search
+  - awesome-pages
+  - mkdocstrings:
+      watch:
+        - cphttp
+
+theme:
+  name: material
