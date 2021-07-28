@@ -1,10 +1,16 @@
-# A very simple reloading HTTP server for ComputePods
+"""
+
+Implement a very simple reloading HTTP server for ComputePods
+
+"""
 
 import argparse
 import asyncio
+import atexit
 from hypercorn.asyncio import serve
 from hypercorn.config  import Config
 import logging
+import signal
 
 import cphttp.fileResponsePatch
 
@@ -13,6 +19,39 @@ from starlette.staticfiles  import StaticFiles
 
 from sse_starlette.sse import EventSourceResponse
 from starlette.responses import PlainTextResponse
+
+heartBeatContinueCounting = True
+
+def stopHeartBeat() :
+  heartBeatContinueCounting = False
+
+atexit.register(stopHeartBeat)
+
+async def heartBeatCounter() :
+  """
+
+  A (slow) counter to act as messages over the /heartBeat SSE.
+
+  """
+
+  count = 0
+  while heartBeatContinueCounting:
+    await asyncio.sleep(2)
+    yield dict(data=count)
+    count = count + 1
+
+async def heartBeatSSE(request) :
+  """
+
+  Implement the /heartBeat SSE end point.
+
+  Start the long running counter and pass it to the sse_starlette
+  EventSourceResponse.
+
+  """
+  counter = heartBeatCounter()
+  return EventSourceResponse(counter)
+
 
 def cphttp() :
   """
@@ -52,17 +91,6 @@ def cphttp() :
 
   app = Starlette(debug=cliArgs.verbose)
 
-  async def heartBeatCounter() :
-    count = 0
-    while True:
-      await asyncio.sleep(2)
-      yield dict(data=count)
-      count = count + 1
-
-  async def heartBeatSSE(request) :
-    counter = heartBeatCounter()
-    return EventSourceResponse(counter)
-
   app.add_route(
     '/heartBeat',
     heartBeatSSE,
@@ -84,9 +112,40 @@ def cphttp() :
   logger = logging.getLogger('hypercorn.access')
   logger.info("Serving static files from [{}]".format(cliArgs.directory))
 
+  shutdownHypercorn = asyncio.Event()
+  def signalHandler(signum) :
+    """
+    Handle an OS system signal by stopping the heartBeat
+
+    """
+    print("")
+    logger.info("SignalHandler: Caught signal {}".format(signum))
+    stopHeartBeat()
+    shutdownHypercorn.set()
+
   for aRoute in app.routes :
     logger.info("MountPoint: [{}]".format(aRoute.path))
 
   loop = asyncio.get_event_loop()
-  loop.set_debug(cliArgs.verbose)
-  loop.run_until_complete(serve(app, config))
+  try :
+    loop.set_debug(cliArgs.verbose)
+    loop.add_signal_handler(signal.SIGTERM, signalHandler, "SIGTERM")
+    loop.add_signal_handler(signal.SIGHUP,  signalHandler, "SIGHUP")
+    loop.add_signal_handler(signal.SIGINT,  signalHandler, "SIGINT")
+    loop.run_until_complete(
+      serve(app, config, shutdown_trigger=shutdownHypercorn.wait)
+    )
+  except Exception as err :
+    msg = "\n ".join(traceback.format_exc().split("\n"))
+    stopHeartBeat()
+    shutdownHypercorn.set()
+    logger.info("Shutting down after exception: \n {}".format(msg))
+    try :
+      loop.stop()
+      loop.close()
+    except Exception as err :
+      logger.error("Could not stop asyncio loop")
+      logger.error(repr(err))
+
+  logger.info("Finised serving")
+  logging.shutdown()
