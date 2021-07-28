@@ -1,10 +1,6 @@
-"""
-
-This fileResponsePatch module monkey patches the
+""" This fileResponsePatch module monkey patches the
 `Starlette::FileResponse.__call__` to allow us to inject our
-`reloaderScript` JavaScript into any HTML responses.
-
-"""
+`reloaderScript` JavaScript into any HTML responses. """
 
 # We model our code (below) on the corresponding code in the
 # Starlette::FileResponse.__call__ taken on 27 July 2021 from the pdm
@@ -53,9 +49,8 @@ from .reloader import reloaderScript
 oldFileResponseCall = FileResponse.__call__
 
 async def newFileResponseCall(self, scope: Scope, receive: Receive, send: Send) -> None:
-  """
-
-  A monkey patched version of the `Starlette::FileResponse.__call__` method.
+  """ A monkey patched version of the `Starlette::FileResponse.__call__`
+  method.
 
   This version detects if the media_type is HTML and if so, reads the file
   line by line looking for the `</head>` element. When found the `</head>`
@@ -67,9 +62,7 @@ async def newFileResponseCall(self, scope: Scope, receive: Receive, send: Send) 
 
   This code is based on the original `Starlette::FileResponse.__call__`
   code. It is used under Starlette's BSD License (see the top of the
-  fileResonsePatch.py file for details)
-
-  """
+  fileResonsePatch.py file for details) """
 
   if not self.media_type.endswith("html") :
     return await oldFileResponseCall(self, scope, receive, send)

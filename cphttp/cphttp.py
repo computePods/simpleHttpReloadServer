@@ -1,7 +1,4 @@
-"""
-Implement a very simple reloading HTTP server for ComputePods
-
-"""
+""" Implement a very simple reloading HTTP server for ComputePods """
 
 import argparse
 # These two imports on adjacent lines confuse the spell checker ;-(
@@ -34,11 +31,8 @@ def stopHeartBeat() :
 atexit.register(stopHeartBeat)
 
 async def heartBeatCounter() :
-  """
-
-  A (slow) counter to act as messages over the /heartBeat SSE.
-
-  """
+  """ A (slow) counter to act as messages over the /heartBeat SSE which
+  help keep the connection open when run through an HTTP-proxy. """
 
   count = 0
   while heartBeatContinueBeating:
@@ -47,11 +41,10 @@ async def heartBeatCounter() :
     count = count + 1
 
 async def heartBeatBeater() :
-  """
+  """ The SSE generator of messages to be sent over the /heartBeat SSE.
 
-  The SSE generator of messages to be sent over the /heartBeat SSE.
-
-  """
+  Using an asyncio.Queue allows the counter and reload messages to be
+  interleaved. """
 
   while heartBeatContinueBeating:
     theMessage = await heartBeatQueue.get()
@@ -59,14 +52,10 @@ async def heartBeatBeater() :
     heartBeatQueue.task_done()
 
 async def heartBeatSSE(request) :
-  """
-
-  Implement the /heartBeat SSE end point.
+  """ Implement the /heartBeat SSE end point.
 
   Start the long running counter and pass it to the sse_starlette
-  EventSourceResponse.
-
-  """
+  EventSourceResponse. """
 
   asyncio.create_task(heartBeatCounter())
 
@@ -77,23 +66,36 @@ async def heartBeatSSE(request) :
 # Manage detecting when to reload
 
 class DebouncingTimer:
+  """ A simple debouncing timer which ensures we wait until any high
+  frequency events have stopped. """
+
   def __init__(self, timeout):
     self.timeout    = timeout
     self.taskFuture = None
 
   def cancelTask(self) :
+    """Cancel the current timer."""
+
     if self.taskFuture :
       self.taskFuture.cancel()
 
   async def doTask(self) :
+    """Sleep for timeout seconds while waiting to be (potentially)
+    cancelled. If we are not cancelled, send a `reload` message to the
+    browser."""
+
     await asyncio.sleep(self.timeout)
     await heartBeatQueue.put("reload")
 
   async def reStart(self) :
+    """Restart the timer (cancel the old one if it exists)."""
+
     self.cancelTask()
     self.taskFuture = asyncio.ensure_future(self.doTask())
 
 async def watchFiles(cliArgs, logger) :
+  """Setup the file system watcher."""
+
   aWatcher = FSWatcher(logger)
   aTimer   = DebouncingTimer(1)
 
@@ -110,10 +112,14 @@ async def watchFiles(cliArgs, logger) :
 
 shutdownHypercorn = asyncio.Event()
 def stopWebServer() :
+  """Tell the Hypercorn server to stop."""
+
   shutdownHypercorn.set()
 atexit.register(stopWebServer)
 
 def configureWebServer(cliArgs) :
+  """ Configure the Hypercorn webserver."""
+
   config = Config()
   config.bind      = [ cliArgs.host+':'+str(cliArgs.port) ]
   config.loglevel  = cliArgs.loglevel
@@ -127,6 +133,8 @@ def configureWebServer(cliArgs) :
   )
 
 async def runWebServer(cliArgs, logger, config) :
+  """Setup the Starlette Application and run it."""
+
   app = Starlette(debug=cliArgs.verbose)
 
   app.add_route(
@@ -151,10 +159,8 @@ async def runWebServer(cliArgs, logger, config) :
 # Main command line
 
 def signalHandler(signum, logger) :
-  """
-  Handle an OS system signal by stopping the heartBeat
+  """ Handle an OS system signal by stopping the heartBeat """
 
-  """
   print("")
   logger.info("SignalHandler: Caught signal {}".format(signum))
   stopHeartBeat()
@@ -166,13 +172,9 @@ async def runUntilShutdown(cliArgs, logger, config) :
   await shutdownHypercorn.wait()
 
 def cphttp() :
-  """
-
-  Parse the command line arguments, configure hypercorn, setup the
+  """ Parse the command line arguments, configure hypercorn, setup the
   /heartBeat Server Sent Events handler using sse_starlette, and then run
-  the server.
-
-  """
+  the server. """
 
   argparser = argparse.ArgumentParser(
     description="A very simple reloading Http server using SSE Starlette and Hypercorn."
