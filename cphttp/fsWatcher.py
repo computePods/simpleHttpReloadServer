@@ -38,6 +38,8 @@ class FSWatcher :
     self.pathsToWatchQueue  = asyncio.Queue()
     self.rootPaths          = []
     self.logger             = logger
+    self.numWatches         = 0
+    self.numUnWatches       = 0
     self.continueWatchingFS = True
 
     # We want Mask.MASK_ADD so that watches are updated
@@ -56,6 +58,9 @@ class FSWatcher :
     # Now we add in Masks we need for this module's book-keeping
     #
     self.wrMask = self.cpMask | Mask.MASK_ADD | Mask.MOVED_FROM | Mask.MOVED_TO | Mask.CREATE | Mask.DELETE_SELF | Mask.IGNORED
+
+  def getRootPaths(self) :
+    return self.rootPaths
 
   def stopWatchingFileSystem(self) :
     """(Gracefully) stop watching the file system"""
@@ -80,6 +85,13 @@ class FSWatcher :
         yield from self.get_directories_recursive(child)
     elif path.is_file() :
       yield path
+
+  def clearWatchStats(self) :
+    self.numWatches   = 0
+    self.numUnWatches = 0
+
+  def getWatchStats(self) :
+    return (self.numWatches, self.numUnWatches)
 
   async def watchAPath(self, pathToWatch) :
     """ Add a single directory or file to be watched by this instance of
@@ -118,6 +130,7 @@ class FSWatcher :
       if addPath :
         for aPath in self.get_directories_recursive(Path(aPathToWatch)) :
           try :
+            self.numWatches = self.numWatches + 1
             self.inotify.add_watch(aPath, self.wrMask)
             self.logger.debug(f'INIT: watching {aPath}')
           except PermissionError as err :
@@ -132,6 +145,7 @@ class FSWatcher :
         # according to the documentation.... the corresponding
         # Mask.IGNORE event will automatically remove this watch.
         #self.inotify.rm_watch(theWatch)
+        self.numUnWatches = self.numUnWatches + 1
         self.logger.debug(f'INIT: unWatching {aPathToWatch}')
         if aPathToWatch in self.rootPaths :
           self.logger.debug(f'INIT: found root path... rewatching it {aPathToWatch}')

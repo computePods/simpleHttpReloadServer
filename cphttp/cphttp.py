@@ -1,7 +1,6 @@
 """ Implement a very simple reloading HTTP server for ComputePods """
 
 import argparse
-# These two imports on adjacent lines confuse the spell checker ;-(
 import asyncio
 import atexit
 from hypercorn.asyncio import serve
@@ -9,6 +8,7 @@ from hypercorn.config  import Config
 
 import json
 import logging
+import os
 import signal
 
 import cphttp.fileResponsePatch
@@ -69,8 +69,10 @@ class DebouncingTimer:
   """ A simple debouncing timer which ensures we wait until any high
   frequency events have stopped. """
 
-  def __init__(self, timeout):
+  def __init__(self, timeout, aWatcher, logger):
     self.timeout    = timeout
+    self.theWatcher = aWatcher
+    self.logger     = logger
     self.taskFuture = None
 
   def cancelTask(self) :
@@ -85,7 +87,24 @@ class DebouncingTimer:
     browser."""
 
     await asyncio.sleep(self.timeout)
-    await heartBeatQueue.put("reload")
+    try :
+      print("testing for reload")
+      rootPaths = self.theWatcher.getRootPaths()
+      for aPath in rootPaths :
+        if not os.path.exists(aPath) :
+          self.logger.debug("Root path [{}] does NOT exist".format(aPath))
+          await self.reStart()
+          return
+      numWatches, numUnWatches = self.theWatcher.getWatchStats()
+      print("watches: {} unWatches: {}".format(numWatches, numUnWatches))
+      if numWatches + 2 < numUnWatches :
+        await self.reStart()
+        return
+      self.theWatcher.clearWatchStats()
+      self.logger.debug("Sending RELOAD message to browser")
+      await heartBeatQueue.put("reload")
+    except Exception as err :
+      print(repr(err))
 
   async def reStart(self) :
     """Restart the timer (cancel the old one if it exists)."""
@@ -97,7 +116,7 @@ async def watchFiles(cliArgs, logger) :
   """Setup the file system watcher."""
 
   aWatcher = FSWatcher(logger)
-  aTimer   = DebouncingTimer(1)
+  aTimer   = DebouncingTimer(1, aWatcher, logger)
 
   asyncio.create_task(aWatcher.managePathsToWatchQueue())
 
