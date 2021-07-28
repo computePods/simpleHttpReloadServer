@@ -20,7 +20,7 @@ reloaderScript = """
 // (and hence should/should-not reload)
 // see: https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
 
-// In the future we might want to add the evolving Page Lifecycle API
+// In the future we might want to add the evolving Page Life cycle API
 // see: https://wicg.github.io/page-lifecycle/
 // see: https://developers.google.com/web/updates/2018/07/page-lifecycle-api#overview_of_page_lifecycle_states_and_events
 
@@ -30,7 +30,7 @@ var hasOpenedOnce        = false
 var isVisible            = false
 var reConnectTimer       = null
 var heartBeat            = null
-var logLevel             = 2
+var logLevel             = 1
 
 function logDebug(message) {
   if (1 < logLevel) {
@@ -137,7 +137,11 @@ function onMessage(evt) {
   //logDebug("EventSource MSG ----------------------")
   //logDebug("HeartBeat connection message")
   // ignore...
-  // var msg = JSON.parse(evt.data)
+  var msg = JSON.parse(evt.data)
+  logDebug("EventSource msg: ["+msg+"]")
+  if (msg == 'reload') {
+    reload()
+  }
 }
 
 window.onload = startReconnectTimer

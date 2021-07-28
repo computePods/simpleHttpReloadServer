@@ -1,18 +1,21 @@
 """
-
 Implement a very simple reloading HTTP server for ComputePods
 
 """
 
 import argparse
-import asyncio
+# These two imports on adjacent lines confuse the spell checker ;-(
+import asyncio
 import atexit
 from hypercorn.asyncio import serve
 from hypercorn.config  import Config
-import logging
+
+import json
+import logging
 import signal
 
 import cphttp.fileResponsePatch
+from .fsWatcher import FSWatcher
 
 from starlette.applications import Starlette
 from starlette.staticfiles  import StaticFiles
@@ -20,11 +23,14 @@ from starlette.staticfiles  import StaticFiles
 from sse_starlette.sse import EventSourceResponse
 from starlette.responses import PlainTextResponse
 
-heartBeatContinueCounting = True
+#########################################################################
+# manage the HeartBeat SSE
 
+heartBeatQueue = asyncio.Queue()
+
+heartBeatContinueBeating = True
 def stopHeartBeat() :
-  heartBeatContinueCounting = False
-
+  heartBeatContinueBeating = False
 atexit.register(stopHeartBeat)
 
 async def heartBeatCounter() :
@@ -35,10 +41,22 @@ async def heartBeatCounter() :
   """
 
   count = 0
-  while heartBeatContinueCounting:
+  while heartBeatContinueBeating:
     await asyncio.sleep(2)
-    yield dict(data=count)
+    await heartBeatQueue.put(str(count))
     count = count + 1
+
+async def heartBeatBeater() :
+  """
+
+  The SSE generator of messages to be sent over the /heartBeat SSE.
+
+  """
+
+  while heartBeatContinueBeating:
+    theMessage = await heartBeatQueue.get()
+    yield dict(data=json.dumps(theMessage))
+    heartBeatQueue.task_done()
 
 async def heartBeatSSE(request) :
   """
@@ -49,9 +67,103 @@ async def heartBeatSSE(request) :
   EventSourceResponse.
 
   """
-  counter = heartBeatCounter()
-  return EventSourceResponse(counter)
 
+  asyncio.create_task(heartBeatCounter())
+
+  beater = heartBeatBeater()
+  return EventSourceResponse(beater)
+
+#########################################################################
+# Manage detecting when to reload
+
+class DebouncingTimer:
+  def __init__(self, timeout):
+    self.timeout    = timeout
+    self.taskFuture = None
+
+  def cancelTask(self) :
+    if self.taskFuture :
+      self.taskFuture.cancel()
+
+  async def doTask(self) :
+    await asyncio.sleep(self.timeout)
+    await heartBeatQueue.put("reload")
+
+  async def reStart(self) :
+    self.cancelTask()
+    self.taskFuture = asyncio.ensure_future(self.doTask())
+
+async def watchFiles(cliArgs, logger) :
+  aWatcher = FSWatcher(logger)
+  aTimer   = DebouncingTimer(1)
+
+  asyncio.create_task(aWatcher.managePathsToWatchQueue())
+
+  for aWatch in cliArgs.watch :
+    await aWatcher.watchARootPath(aWatch)
+
+  async for event in aWatcher.watchForFileSystemEvents() :
+    await aTimer.reStart()
+
+#########################################################################
+# setup the webserver
+
+shutdownHypercorn = asyncio.Event()
+def stopWebServer() :
+  shutdownHypercorn.set()
+atexit.register(stopWebServer)
+
+def configureWebServer(cliArgs) :
+  config = Config()
+  config.bind      = [ cliArgs.host+':'+str(cliArgs.port) ]
+  config.loglevel  = cliArgs.loglevel
+  config.accesslog = cliArgs.accesslog
+  config.errorlog  = cliArgs.errorlog
+  config.log # Force the config object to instantiate the loggers
+
+  return (
+    logging.getLogger('hypercorn.access'),
+    config
+  )
+
+async def runWebServer(cliArgs, logger, config) :
+  app = Starlette(debug=cliArgs.verbose)
+
+  app.add_route(
+    '/heartBeat',
+    heartBeatSSE,
+    name='heartBeat'
+  )
+  app.mount(
+    '/',
+    StaticFiles(directory=cliArgs.directory, html=True),
+    name='home'
+  )
+
+  logger.info("Serving static files from [{}]".format(cliArgs.directory))
+
+  for aRoute in app.routes :
+    logger.info("MountPoint: [{}]".format(aRoute.path))
+
+  await serve(app, config, shutdown_trigger=shutdownHypercorn.wait)
+
+#########################################################################
+# Main command line
+
+def signalHandler(signum, logger) :
+  """
+  Handle an OS system signal by stopping the heartBeat
+
+  """
+  print("")
+  logger.info("SignalHandler: Caught signal {}".format(signum))
+  stopHeartBeat()
+  shutdownHypercorn.set()
+
+async def runUntilShutdown(cliArgs, logger, config) :
+  asyncio.create_task(watchFiles(cliArgs, logger))
+  asyncio.create_task(runWebServer(cliArgs, logger, config))
+  await shutdownHypercorn.wait()
 
 def cphttp() :
   """
@@ -87,65 +199,20 @@ def cphttp() :
   argparser.add_argument("-l", "--loglevel", default='INFO',
     help="specify the access/error logging level (default: INFO)"
   )
+  argparser.add_argument("-w", "--watch", default=[], action='append',
+    help="sepcify the directories/files to watch (can be used multiple times) (default: none)"
+  )
   cliArgs = argparser.parse_args()
+  logger, config = configureWebServer(cliArgs)
 
-  app = Starlette(debug=cliArgs.verbose)
-
-  app.add_route(
-    '/heartBeat',
-    heartBeatSSE,
-    name='heartBeat'
-  )
-  app.mount(
-    '/',
-    StaticFiles(directory=cliArgs.directory, html=True),
-    name='home'
-  )
-
-  config = Config()
-  config.bind      = [ cliArgs.host+':'+str(cliArgs.port) ]
-  config.loglevel  = cliArgs.loglevel
-  config.accesslog = cliArgs.accesslog
-  config.errorlog  = cliArgs.errorlog
-  config.log # Force the config object to instantiate the loggers
-
-  logger = logging.getLogger('hypercorn.access')
-  logger.info("Serving static files from [{}]".format(cliArgs.directory))
-
-  shutdownHypercorn = asyncio.Event()
-  def signalHandler(signum) :
-    """
-    Handle an OS system signal by stopping the heartBeat
-
-    """
-    print("")
-    logger.info("SignalHandler: Caught signal {}".format(signum))
-    stopHeartBeat()
-    shutdownHypercorn.set()
-
-  for aRoute in app.routes :
-    logger.info("MountPoint: [{}]".format(aRoute.path))
+  # setup the asyncio loop
 
   loop = asyncio.get_event_loop()
-  try :
-    loop.set_debug(cliArgs.verbose)
-    loop.add_signal_handler(signal.SIGTERM, signalHandler, "SIGTERM")
-    loop.add_signal_handler(signal.SIGHUP,  signalHandler, "SIGHUP")
-    loop.add_signal_handler(signal.SIGINT,  signalHandler, "SIGINT")
-    loop.run_until_complete(
-      serve(app, config, shutdown_trigger=shutdownHypercorn.wait)
-    )
-  except Exception as err :
-    msg = "\n ".join(traceback.format_exc().split("\n"))
-    stopHeartBeat()
-    shutdownHypercorn.set()
-    logger.info("Shutting down after exception: \n {}".format(msg))
-    try :
-      loop.stop()
-      loop.close()
-    except Exception as err :
-      logger.error("Could not stop asyncio loop")
-      logger.error(repr(err))
+  loop.set_debug(cliArgs.verbose)
+  loop.add_signal_handler(signal.SIGTERM, signalHandler, "SIGTERM", logger)
+  loop.add_signal_handler(signal.SIGHUP,  signalHandler, "SIGHUP",  logger)
+  loop.add_signal_handler(signal.SIGINT,  signalHandler, "SIGINT",  logger)
+  loop.run_until_complete(runUntilShutdown(cliArgs, logger, config))
 
   logger.info("Finised serving")
   logging.shutdown()

@@ -27,5 +27,7 @@ optional arguments:
                         specify a file for the error log (default: stdout)
   -l LOGLEVEL, --loglevel LOGLEVEL
                         specify the access/error logging level (default: INFO)
-
+  -w WATCH, --watch WATCH
+                        sepcify the directories/files to watch (can be used
+                        multiple times) (default: none)
 ```

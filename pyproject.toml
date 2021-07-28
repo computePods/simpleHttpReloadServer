@@ -8,6 +8,7 @@ authors = [
 dependencies = [
     "hypercorn~=0.11",
     "sse-starlette~=0.7",
+    "asyncinotify~=2.0",
 ]
 requires-python = ">=3.9"
 dynamic = ["classifiers"]

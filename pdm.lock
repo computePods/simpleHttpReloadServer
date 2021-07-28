@@ -9,6 +9,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "asyncinotify"
+version = "2.0.2"
+summary = "A simple optionally-async python inotify library, focused on simplicity of use and operation, and leveraging modern Python features"
+
+[[package]]
 name = "h11"
 version = "0.12.0"
 requires_python = ">=3.6"
@@ -102,12 +107,15 @@ dependencies = [
 
 [metadata]
 lock_version = "3"
-content_hash = "sha256:edf69580b4532bf217ebfc431bf4449782fb05faa05325bdb6790649e2d7714e"
+content_hash = "sha256:f498ce742f39c9d0df2d416d50b68585836293dd77c0ec7237f52535aab5dde1"
 
 [metadata.files]
 "anyio 3.3.0" = [
     {file = "anyio-3.3.0-py3-none-any.whl", hash = "sha256:929a6852074397afe1d989002aa96d457e3e1e5441357c60d03e7eea0e65e1b0"},
     {file = "anyio-3.3.0.tar.gz", hash = "sha256:ae57a67583e5ff8b4af47666ff5651c3732d45fd26c929253748e796af860374"},
+]
+"asyncinotify 2.0.2" = [
+    {file = "asyncinotify-2.0.2-py3-none-any.whl", hash = "sha256:26fa85d282df0066ab423cd96754d7ea07e6013d8a69a51e573303dbd0d2dff6"},
 ]
 "h11 0.12.0" = [
     {file = "h11-0.12.0-py3-none-any.whl", hash = "sha256:36a3cb8c0a032f56e2da7084577878a035d3b61d104230d4bd49c0c6b555a9c6"},

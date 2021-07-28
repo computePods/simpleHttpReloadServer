@@ -46,6 +46,7 @@ logger = logging.getLogger('hypercorn.access')
 
 from starlette.responses import FileResponse
 from starlette.types import Receive, Scope, Send
+from starlette.datastructures import Headers
 
 from .reloader import reloaderScript
 
