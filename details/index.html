@@ -1,0 +1,1996 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://computepods.github.io/simpleHttpReloadServer/details/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
+    
+    
+      
+        <title>Python code details - ComputePods Simple reloading HTTP server</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#python-code-details" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="/" title="ComputePods Simple reloading HTTP server" class="md-header__button md-logo" aria-label="ComputePods Simple reloading HTTP server" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ComputePods Simple reloading HTTP server
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Python code details
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/computePods/simpleHttpReloadServer/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="/" title="ComputePods Simple reloading HTTP server" class="md-nav__button md-logo" aria-label="ComputePods Simple reloading HTTP server" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    ComputePods Simple reloading HTTP server
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/computePods/simpleHttpReloadServer/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        ComputePods Simple reloading HTTP server
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Python code details
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Python code details
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp" class="md-nav__link">
+    cphttp
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.cphttp" class="md-nav__link">
+    cphttp
+  </a>
+  
+    <nav class="md-nav" aria-label="cphttp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer" class="md-nav__link">
+    DebouncingTimer
+  </a>
+  
+    <nav class="md-nav" aria-label="DebouncingTimer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer.cancelTask" class="md-nav__link">
+    cancelTask()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer.doTask" class="md-nav__link">
+    doTask()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer.reStart" class="md-nav__link">
+    reStart()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.configureWebServer" class="md-nav__link">
+    configureWebServer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.cphttp" class="md-nav__link">
+    cphttp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.heartBeatBeater" class="md-nav__link">
+    heartBeatBeater()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.heartBeatCounter" class="md-nav__link">
+    heartBeatCounter()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.heartBeatSSE" class="md-nav__link">
+    heartBeatSSE()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.runWebServer" class="md-nav__link">
+    runWebServer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.signalHandler" class="md-nav__link">
+    signalHandler()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.stopWebServer" class="md-nav__link">
+    stopWebServer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.watchFiles" class="md-nav__link">
+    watchFiles()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.fileResponsePatch" class="md-nav__link">
+    fileResponsePatch
+  </a>
+  
+    <nav class="md-nav" aria-label="fileResponsePatch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fileResponsePatch.newFileResponseCall" class="md-nav__link">
+    newFileResponseCall()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher" class="md-nav__link">
+    fsWatcher
+  </a>
+  
+    <nav class="md-nav" aria-label="fsWatcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher" class="md-nav__link">
+    FSWatcher
+  </a>
+  
+    <nav class="md-nav" aria-label="FSWatcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.get_directories_recursive" class="md-nav__link">
+    get_directories_recursive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.managePathsToWatchQueue" class="md-nav__link">
+    managePathsToWatchQueue()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.stopWatchingFileSystem" class="md-nav__link">
+    stopWatchingFileSystem()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.unWatchAPath" class="md-nav__link">
+    unWatchAPath()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.watchAPath" class="md-nav__link">
+    watchAPath()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.watchARootPath" class="md-nav__link">
+    watchARootPath()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.watchForFileSystemEvents" class="md-nav__link">
+    watchForFileSystemEvents()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.reloader" class="md-nav__link">
+    reloader
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp" class="md-nav__link">
+    cphttp
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.cphttp" class="md-nav__link">
+    cphttp
+  </a>
+  
+    <nav class="md-nav" aria-label="cphttp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer" class="md-nav__link">
+    DebouncingTimer
+  </a>
+  
+    <nav class="md-nav" aria-label="DebouncingTimer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer.cancelTask" class="md-nav__link">
+    cancelTask()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer.doTask" class="md-nav__link">
+    doTask()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.DebouncingTimer.reStart" class="md-nav__link">
+    reStart()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.configureWebServer" class="md-nav__link">
+    configureWebServer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.cphttp" class="md-nav__link">
+    cphttp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.heartBeatBeater" class="md-nav__link">
+    heartBeatBeater()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.heartBeatCounter" class="md-nav__link">
+    heartBeatCounter()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.heartBeatSSE" class="md-nav__link">
+    heartBeatSSE()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.runWebServer" class="md-nav__link">
+    runWebServer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.signalHandler" class="md-nav__link">
+    signalHandler()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.stopWebServer" class="md-nav__link">
+    stopWebServer()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.cphttp.watchFiles" class="md-nav__link">
+    watchFiles()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.fileResponsePatch" class="md-nav__link">
+    fileResponsePatch
+  </a>
+  
+    <nav class="md-nav" aria-label="fileResponsePatch">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fileResponsePatch.newFileResponseCall" class="md-nav__link">
+    newFileResponseCall()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher" class="md-nav__link">
+    fsWatcher
+  </a>
+  
+    <nav class="md-nav" aria-label="fsWatcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher" class="md-nav__link">
+    FSWatcher
+  </a>
+  
+    <nav class="md-nav" aria-label="FSWatcher">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.get_directories_recursive" class="md-nav__link">
+    get_directories_recursive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.managePathsToWatchQueue" class="md-nav__link">
+    managePathsToWatchQueue()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.stopWatchingFileSystem" class="md-nav__link">
+    stopWatchingFileSystem()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.unWatchAPath" class="md-nav__link">
+    unWatchAPath()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.watchAPath" class="md-nav__link">
+    watchAPath()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.watchARootPath" class="md-nav__link">
+    watchARootPath()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cphttp.fsWatcher.FSWatcher.watchForFileSystemEvents" class="md-nav__link">
+    watchForFileSystemEvents()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cphttp.reloader" class="md-nav__link">
+    reloader
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/computePods/simpleHttpReloadServer/edit/master/docs/details.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="python-code-details">Python code details</h1>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="cphttp"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="cphttp.cphttp" class="doc doc-heading">
+        <code>cphttp</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>Implement a very simple reloading HTTP server for ComputePods </p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="cphttp.cphttp.DebouncingTimer" class="doc doc-heading">
+        <code>DebouncingTimer</code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A simple debouncing timer which ensures we wait until any high
+frequency events have stopped. </p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.cphttp.DebouncingTimer.cancelTask" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">cancelTask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Cancel the current timer.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cancelTask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Cancel the current timer.&quot;&quot;&quot;</span>
+
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span> <span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.cphttp.DebouncingTimer.doTask" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">doTask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Sleep for timeout seconds while waiting to be (potentially)
+cancelled. If we are not cancelled, send a <code>reload</code> message to the
+browser.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">doTask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Sleep for timeout seconds while waiting to be (potentially)</span>
+<span class="sd">  cancelled. If we are not cancelled, send a `reload` message to the</span>
+<span class="sd">  browser.&quot;&quot;&quot;</span>
+
+  <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+  <span class="k">try</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;testing for reload&quot;</span><span class="p">)</span>
+    <span class="n">rootPaths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theWatcher</span><span class="o">.</span><span class="n">getRootPaths</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">aPath</span> <span class="ow">in</span> <span class="n">rootPaths</span> <span class="p">:</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">aPath</span><span class="p">)</span> <span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Root path [</span><span class="si">{}</span><span class="s2">] does NOT exist&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">aPath</span><span class="p">))</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">reStart</span><span class="p">()</span>
+        <span class="k">return</span>
+    <span class="n">numWatches</span><span class="p">,</span> <span class="n">numUnWatches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">theWatcher</span><span class="o">.</span><span class="n">getWatchStats</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;watches: </span><span class="si">{}</span><span class="s2"> unWatches: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numWatches</span><span class="p">,</span> <span class="n">numUnWatches</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">numWatches</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">&lt;</span> <span class="n">numUnWatches</span> <span class="p">:</span>
+      <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">reStart</span><span class="p">()</span>
+      <span class="k">return</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">theWatcher</span><span class="o">.</span><span class="n">clearWatchStats</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Sending RELOAD message to browser&quot;</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">heartBeatQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;reload&quot;</span><span class="p">)</span>
+  <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span> <span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">err</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.cphttp.DebouncingTimer.reStart" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">reStart</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Restart the timer (cancel the old one if it exists).</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">reStart</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Restart the timer (cancel the old one if it exists).&quot;&quot;&quot;</span>
+
+  <span class="bp">self</span><span class="o">.</span><span class="n">cancelTask</span><span class="p">()</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">taskFuture</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">ensure_future</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">doTask</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.configureWebServer" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">configureWebServer</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Configure the Hypercorn webserver.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">configureWebServer</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Configure the Hypercorn webserver.&quot;&quot;&quot;</span>
+
+  <span class="n">config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">bind</span>      <span class="o">=</span> <span class="p">[</span> <span class="n">cliArgs</span><span class="o">.</span><span class="n">host</span><span class="o">+</span><span class="s1">&#39;:&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">cliArgs</span><span class="o">.</span><span class="n">port</span><span class="p">)</span> <span class="p">]</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">loglevel</span>  <span class="o">=</span> <span class="n">cliArgs</span><span class="o">.</span><span class="n">loglevel</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">accesslog</span> <span class="o">=</span> <span class="n">cliArgs</span><span class="o">.</span><span class="n">accesslog</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">errorlog</span>  <span class="o">=</span> <span class="n">cliArgs</span><span class="o">.</span><span class="n">errorlog</span>
+  <span class="n">config</span><span class="o">.</span><span class="n">log</span> <span class="c1"># Force the config object to instantiate the loggers</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;hypercorn.access&#39;</span><span class="p">),</span>
+    <span class="n">config</span>
+  <span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.cphttp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">cphttp</span><span class="p">()</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Parse the command line arguments, configure hypercorn, setup the
+/heartBeat Server Sent Events handler using sse_starlette, and then run
+the server. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cphttp</span><span class="p">()</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Parse the command line arguments, configure hypercorn, setup the</span>
+<span class="sd">  /heartBeat Server Sent Events handler using sse_starlette, and then run</span>
+<span class="sd">  the server. &quot;&quot;&quot;</span>
+
+  <span class="n">argparser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A very simple reloading Http server using SSE Starlette and Hypercorn.&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-H&quot;</span><span class="p">,</span> <span class="s2">&quot;--host&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The host interface to listen on (default: localhost)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="s2">&quot;--port&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">8008</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The port to listen on (default: 8008)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">,</span> <span class="s2">&quot;--directory&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;html&quot;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The html directory to serve static files from (default: html)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-v&quot;</span><span class="p">,</span> <span class="s2">&quot;--verbose&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">action</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">BooleanOptionalAction</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;provide more information about what is happening&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-a&quot;</span><span class="p">,</span> <span class="s2">&quot;--accesslog&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;specify a file for the access log (default: stdout)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-e&quot;</span><span class="p">,</span> <span class="s2">&quot;--errorlog&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;specify a file for the error log (default: stdout)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-l&quot;</span><span class="p">,</span> <span class="s2">&quot;--loglevel&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;INFO&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;specify the access/error logging level (default: INFO)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-w&quot;</span><span class="p">,</span> <span class="s2">&quot;--watch&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;sepcify the directories/files to watch (can be used multiple times) (default: none)&quot;</span>
+  <span class="p">)</span>
+  <span class="n">cliArgs</span> <span class="o">=</span> <span class="n">argparser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+  <span class="n">logger</span><span class="p">,</span> <span class="n">config</span> <span class="o">=</span> <span class="n">configureWebServer</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">)</span>
+
+  <span class="c1"># setup the asyncio loop</span>
+
+  <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+  <span class="n">loop</span><span class="o">.</span><span class="n">set_debug</span><span class="p">(</span><span class="n">cliArgs</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+  <span class="n">loop</span><span class="o">.</span><span class="n">add_signal_handler</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGTERM</span><span class="p">,</span> <span class="n">signalHandler</span><span class="p">,</span> <span class="s2">&quot;SIGTERM&quot;</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+  <span class="n">loop</span><span class="o">.</span><span class="n">add_signal_handler</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGHUP</span><span class="p">,</span>  <span class="n">signalHandler</span><span class="p">,</span> <span class="s2">&quot;SIGHUP&quot;</span><span class="p">,</span>  <span class="n">logger</span><span class="p">)</span>
+  <span class="n">loop</span><span class="o">.</span><span class="n">add_signal_handler</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">SIGINT</span><span class="p">,</span>  <span class="n">signalHandler</span><span class="p">,</span> <span class="s2">&quot;SIGINT&quot;</span><span class="p">,</span>  <span class="n">logger</span><span class="p">)</span>
+  <span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">runUntilShutdown</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="p">))</span>
+
+  <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Finised serving&quot;</span><span class="p">)</span>
+  <span class="n">logging</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.heartBeatBeater" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">heartBeatBeater</span><span class="p">()</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The SSE generator of messages to be sent over the /heartBeat SSE.</p>
+<p>Using an asyncio.Queue allows the counter and reload messages to be
+interleaved. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">heartBeatBeater</span><span class="p">()</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; The SSE generator of messages to be sent over the /heartBeat SSE.</span>
+
+<span class="sd">  Using an asyncio.Queue allows the counter and reload messages to be</span>
+<span class="sd">  interleaved. &quot;&quot;&quot;</span>
+
+  <span class="k">while</span> <span class="n">heartBeatContinueBeating</span><span class="p">:</span>
+    <span class="n">theMessage</span> <span class="o">=</span> <span class="k">await</span> <span class="n">heartBeatQueue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">yield</span> <span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">theMessage</span><span class="p">))</span>
+    <span class="n">heartBeatQueue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.heartBeatCounter" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">heartBeatCounter</span><span class="p">()</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A (slow) counter to act as messages over the /heartBeat SSE which
+help keep the connection open when run through an HTTP-proxy. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">heartBeatCounter</span><span class="p">()</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; A (slow) counter to act as messages over the /heartBeat SSE which</span>
+<span class="sd">  help keep the connection open when run through an HTTP-proxy. &quot;&quot;&quot;</span>
+
+  <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">heartBeatContinueBeating</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">heartBeatQueue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.heartBeatSSE" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">heartBeatSSE</span><span class="p">(</span><span class="n">request</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Implement the /heartBeat SSE end point.</p>
+<p>Start the long running counter and pass it to the sse_starlette
+EventSourceResponse. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">heartBeatSSE</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Implement the /heartBeat SSE end point.</span>
+
+<span class="sd">  Start the long running counter and pass it to the sse_starlette</span>
+<span class="sd">  EventSourceResponse. &quot;&quot;&quot;</span>
+
+  <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">heartBeatCounter</span><span class="p">())</span>
+
+  <span class="n">beater</span> <span class="o">=</span> <span class="n">heartBeatBeater</span><span class="p">()</span>
+  <span class="k">return</span> <span class="n">EventSourceResponse</span><span class="p">(</span><span class="n">beater</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.runWebServer" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">runWebServer</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Setup the Starlette Application and run it.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">runWebServer</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Setup the Starlette Application and run it.&quot;&quot;&quot;</span>
+
+  <span class="n">app</span> <span class="o">=</span> <span class="n">Starlette</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="n">cliArgs</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+  <span class="n">app</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span>
+    <span class="s1">&#39;/heartBeat&#39;</span><span class="p">,</span>
+    <span class="n">heartBeatSSE</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;heartBeat&#39;</span>
+  <span class="p">)</span>
+  <span class="n">app</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span>
+    <span class="s1">&#39;/&#39;</span><span class="p">,</span>
+    <span class="n">StaticFiles</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="n">cliArgs</span><span class="o">.</span><span class="n">directory</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;home&#39;</span>
+  <span class="p">)</span>
+
+  <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Serving static files from [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cliArgs</span><span class="o">.</span><span class="n">directory</span><span class="p">))</span>
+
+  <span class="k">for</span> <span class="n">aRoute</span> <span class="ow">in</span> <span class="n">app</span><span class="o">.</span><span class="n">routes</span> <span class="p">:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MountPoint: [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">aRoute</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+
+  <span class="k">await</span> <span class="n">serve</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">shutdown_trigger</span><span class="o">=</span><span class="n">shutdownHypercorn</span><span class="o">.</span><span class="n">wait</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.signalHandler" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">signalHandler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Handle an OS system signal by stopping the heartBeat </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">signalHandler</span><span class="p">(</span><span class="n">signum</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Handle an OS system signal by stopping the heartBeat &quot;&quot;&quot;</span>
+
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;SignalHandler: Caught signal </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">signum</span><span class="p">))</span>
+  <span class="n">stopHeartBeat</span><span class="p">()</span>
+  <span class="n">shutdownHypercorn</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.stopWebServer" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">stopWebServer</span><span class="p">()</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Tell the Hypercorn server to stop.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">stopWebServer</span><span class="p">()</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Tell the Hypercorn server to stop.&quot;&quot;&quot;</span>
+
+  <span class="n">shutdownHypercorn</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.cphttp.watchFiles" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">watchFiles</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Setup the file system watcher.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/cphttp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">watchFiles</span><span class="p">(</span><span class="n">cliArgs</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Setup the file system watcher.&quot;&quot;&quot;</span>
+
+  <span class="n">aWatcher</span> <span class="o">=</span> <span class="n">FSWatcher</span><span class="p">(</span><span class="n">logger</span><span class="p">)</span>
+  <span class="n">aTimer</span>   <span class="o">=</span> <span class="n">DebouncingTimer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">aWatcher</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+
+  <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">aWatcher</span><span class="o">.</span><span class="n">managePathsToWatchQueue</span><span class="p">())</span>
+
+  <span class="k">for</span> <span class="n">aWatch</span> <span class="ow">in</span> <span class="n">cliArgs</span><span class="o">.</span><span class="n">watch</span> <span class="p">:</span>
+    <span class="k">await</span> <span class="n">aWatcher</span><span class="o">.</span><span class="n">watchARootPath</span><span class="p">(</span><span class="n">aWatch</span><span class="p">)</span>
+
+  <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">aWatcher</span><span class="o">.</span><span class="n">watchForFileSystemEvents</span><span class="p">()</span> <span class="p">:</span>
+    <span class="k">await</span> <span class="n">aTimer</span><span class="o">.</span><span class="n">reStart</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="cphttp.fileResponsePatch" class="doc doc-heading">
+        <code>fileResponsePatch</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>This fileResponsePatch module monkey patches the
+<code>Starlette::FileResponse.__call__</code> to allow us to inject our
+<code>reloaderScript</code> JavaScript into any HTML responses. </p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="cphttp.fileResponsePatch.newFileResponseCall" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">newFileResponseCall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>A monkey patched version of the <code>Starlette::FileResponse.__call__</code>
+method.</p>
+<p>This version detects if the media_type is HTML and if so, reads the file
+line by line looking for the <code>&lt;/head&gt;</code> element. When found the <code>&lt;/head&gt;</code>
+string is replaced by a <code>&lt;script&gt;...&lt;/script&gt;&lt;/head&gt;</code> string which
+contains the <code>reloaderScript</code> from the <code>cphttp.reloader</code></p>
+<p>If the file is <em>not</em> an HTML file, the original
+<code>Starlette::FileResponse.__call__</code> is called.</p>
+<p>This code is based on the original <code>Starlette::FileResponse.__call__</code>
+code. It is used under Starlette's BSD License (see the top of the
+fileResonsePatch.py file for details) </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fileResponsePatch.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">newFileResponseCall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; A monkey patched version of the `Starlette::FileResponse.__call__`</span>
+<span class="sd">  method.</span>
+
+<span class="sd">  This version detects if the media_type is HTML and if so, reads the file</span>
+<span class="sd">  line by line looking for the `&lt;/head&gt;` element. When found the `&lt;/head&gt;`</span>
+<span class="sd">  string is replaced by a `&lt;script&gt;...&lt;/script&gt;&lt;/head&gt;` string which</span>
+<span class="sd">  contains the `reloaderScript` from the `cphttp.reloader`</span>
+
+<span class="sd">  If the file is *not* an HTML file, the original</span>
+<span class="sd">  `Starlette::FileResponse.__call__` is called.</span>
+
+<span class="sd">  This code is based on the original `Starlette::FileResponse.__call__`</span>
+<span class="sd">  code. It is used under Starlette&#39;s BSD License (see the top of the</span>
+<span class="sd">  fileResonsePatch.py file for details) &quot;&quot;&quot;</span>
+
+  <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">media_type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">return</span> <span class="k">await</span> <span class="n">oldFileResponseCall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
+
+  <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Injecting reloader into [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">))</span>
+
+  <span class="n">headReplacementStr</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    &lt;script&gt;</span><span class="si">{}</span><span class="s2">&lt;/script&gt;</span>
+<span class="s2">  &lt;/head&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reloaderScript</span><span class="p">)</span>
+  <span class="n">headReplacementSize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">headReplacementStr</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">stat_result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+      <span class="n">stat_result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">anyio</span><span class="o">.</span><span class="n">to_thread</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">set_stat_headers</span><span class="p">(</span><span class="n">stat_result</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+      <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File at path </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">mode</span> <span class="o">=</span> <span class="n">stat_result</span><span class="o">.</span><span class="n">st_mode</span>
+      <span class="k">if</span> <span class="ow">not</span> <span class="n">stat</span><span class="o">.</span><span class="n">S_ISREG</span><span class="p">(</span><span class="n">mode</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File at path </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> is not a file.&quot;</span><span class="p">)</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;content-length&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stat_result</span><span class="o">.</span><span class="n">st_size</span> <span class="o">+</span> <span class="n">headReplacementSize</span><span class="p">)</span>
+  <span class="k">await</span> <span class="n">send</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.start&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span>
+      <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_headers</span><span class="p">,</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">send_header_only</span><span class="p">:</span>
+    <span class="k">await</span> <span class="n">send</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">,</span> <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;more_body&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="k">await</span> <span class="n">anyio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+      <span class="n">more_body</span> <span class="o">=</span> <span class="kc">True</span>
+      <span class="k">while</span> <span class="n">more_body</span><span class="p">:</span>
+        <span class="n">aLine</span> <span class="o">=</span> <span class="k">await</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="n">more_body</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">aLine</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;</span> <span class="n">aLine</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">)</span> <span class="p">:</span>
+          <span class="n">aLine</span> <span class="o">=</span> <span class="n">aLine</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&lt;/head&gt;&#39;</span><span class="p">,</span> <span class="n">headReplacementStr</span><span class="p">)</span>
+        <span class="k">await</span> <span class="n">send</span><span class="p">(</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;http.response.body&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">aLine</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">),</span>
+            <span class="s2">&quot;more_body&quot;</span><span class="p">:</span> <span class="n">more_body</span><span class="p">,</span>
+          <span class="p">}</span>
+        <span class="p">)</span>
+  <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">background</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">background</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="cphttp.fsWatcher" class="doc doc-heading">
+        <code>fsWatcher</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>The fsWatcher module adapts the
+<a href="https://asyncinotify.readthedocs.io/en/latest/">asyncinotify</a>
+<a href="https://gitlab.com/Taywee/asyncinotify/-/blob/master/examples/recursivewatch.py">example</a>
+to recursively watch directories or files either by a direct request, or
+as they are created inside watched directories. </p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="cphttp.fsWatcher.FSWatcher" class="doc doc-heading">
+        <code>FSWatcher</code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>The <code>FSWatcher</code> class manages the Linux file system <code>inotify</code>
+watches for a given collection of directories or files. It provides a
+file change event stream via the iterable <code>recursive_watch</code> method.</p>
+<p>To allow for asynchronous operation, the "watches" are added to an
+<code>asyncio.Queue</code> managed by the <code>managePathsToWatchQueue</code> method. When
+used, this <code>managePathsToWatchQueue</code> method should be run inside its own
+<code>asyncio.Task</code>. </p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.get_directories_recursive" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_directories_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Recursively list all directories under path, including path
+itself, if it's a directory.</p>
+<p>The path itself is always yielded before its children are iterated, so
+you can pre-process a path (by watching it with inotify) before you
+get the directory listing. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_directories_recursive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Recursively list all directories under path, including path</span>
+<span class="sd">  itself, if it&#39;s a directory.</span>
+
+<span class="sd">  The path itself is always yielded before its children are iterated, so</span>
+<span class="sd">  you can pre-process a path (by watching it with inotify) before you</span>
+<span class="sd">  get the directory listing. &quot;&quot;&quot;</span>
+
+  <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span> <span class="p">:</span>
+    <span class="k">yield</span> <span class="n">path</span>
+    <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+      <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_directories_recursive</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">path</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="p">:</span>
+    <span class="k">yield</span> <span class="n">path</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.managePathsToWatchQueue" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">managePathsToWatchQueue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Implement all (pending) requests to watch/unWatch a directory or
+file which are in the <code>pathsToWatchQueue</code>.</p>
+<p>When watching, the paths contained in all directories are themselves
+recursively added to the <code>pathsToWatchQueue</code>. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">managePathsToWatchQueue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Implement all (pending) requests to watch/unWatch a directory or</span>
+<span class="sd">  file which are in the `pathsToWatchQueue`.</span>
+
+<span class="sd">  When watching, the paths contained in all directories are themselves</span>
+<span class="sd">  recursively added to the `pathsToWatchQueue`. &quot;&quot;&quot;</span>
+
+  <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">continueWatchingFS</span> <span class="p">:</span>
+    <span class="n">addPath</span><span class="p">,</span> <span class="n">aPathToWatch</span><span class="p">,</span> <span class="n">theWatch</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">pathsToWatchQueue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">addPath</span> <span class="p">:</span>
+      <span class="k">for</span> <span class="n">aPath</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_directories_recursive</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">aPathToWatch</span><span class="p">))</span> <span class="p">:</span>
+        <span class="k">try</span> <span class="p">:</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">numWatches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numWatches</span> <span class="o">+</span> <span class="mi">1</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">inotify</span><span class="o">.</span><span class="n">add_watch</span><span class="p">(</span><span class="n">aPath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">wrMask</span><span class="p">)</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;INIT: watching </span><span class="si">{</span><span class="n">aPath</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">PermissionError</span> <span class="k">as</span> <span class="n">err</span> <span class="p">:</span>
+          <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception while trying to watch: [</span><span class="si">{</span><span class="n">aPath</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+          <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+          <span class="c1"># we can&#39;t watch this path just yet...</span>
+          <span class="c1"># ... schedule its parent and try again...</span>
+          <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">watchAPath</span><span class="p">(</span><span class="n">aPath</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+    <span class="k">else</span> <span class="p">:</span>
+      <span class="c1"># according to the documentation.... the corresponding</span>
+      <span class="c1"># Mask.IGNORE event will automatically remove this watch.</span>
+      <span class="c1">#self.inotify.rm_watch(theWatch)</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">numUnWatches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numUnWatches</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;INIT: unWatching </span><span class="si">{</span><span class="n">aPathToWatch</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+      <span class="k">if</span> <span class="n">aPathToWatch</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rootPaths</span> <span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;INIT: found root path... rewatching it </span><span class="si">{</span><span class="n">aPathToWatch</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">watchAPath</span><span class="p">(</span><span class="n">aPathToWatch</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pathsToWatchQueue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.stopWatchingFileSystem" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">stopWatchingFileSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>(Gracefully) stop watching the file system</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">stopWatchingFileSystem</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;(Gracefully) stop watching the file system&quot;&quot;&quot;</span>
+
+  <span class="bp">self</span><span class="o">.</span><span class="n">continueWatchingFS</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.unWatchAPath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">unWatchAPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">,</span> <span class="n">aWatch</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Add a single directory or file to be unWatched by this instance of
+<code>FSWatcher</code> to the <code>pathsToWatchQueue</code>. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">unWatchAPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">,</span> <span class="n">aWatch</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Add a single directory or file to be unWatched by this instance of</span>
+<span class="sd">  `FSWatcher` to the `pathsToWatchQueue`. &quot;&quot;&quot;</span>
+
+  <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Adding path to (un)watch queue </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pathToWatch</span><span class="p">))</span>
+  <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">pathsToWatchQueue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="kc">False</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">,</span> <span class="n">aWatch</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.watchAPath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">watchAPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Add a single directory or file to be watched by this instance of
+<code>FSWatcher</code> to the <code>pathsToWatchQueue</code>. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">watchAPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot; Add a single directory or file to be watched by this instance of</span>
+<span class="sd">  `FSWatcher` to the `pathsToWatchQueue`. &quot;&quot;&quot;</span>
+
+  <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Adding path to watch queue </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pathToWatch</span><span class="p">))</span>
+  <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">pathsToWatchQueue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="kc">True</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.watchARootPath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">watchARootPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Add a single directory or file to the list of "root" paths to watch
+as well as schedule it to be watched. When one of the root paths is
+deleted, it will be re-watched.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">watchARootPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pathToWatch</span><span class="p">)</span> <span class="p">:</span>
+  <span class="sd">&quot;&quot;&quot;Add a single directory or file to the list of &quot;root&quot; paths to watch</span>
+<span class="sd">  as well as schedule it to be watched. When one of the root paths is</span>
+<span class="sd">  deleted, it will be re-watched.&quot;&quot;&quot;</span>
+
+
+  <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Adding root path [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pathToWatch</span><span class="p">))</span>
+  <span class="bp">self</span><span class="o">.</span><span class="n">rootPaths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pathToWatch</span><span class="p">)</span>
+  <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">watchAPath</span><span class="p">(</span><span class="n">pathToWatch</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="cphttp.fsWatcher.FSWatcher.watchForFileSystemEvents" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">watchForFileSystemEvents</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>An asynchronously interable method which yields file system change
+events. </p>
+
+        <details class="quote">
+          <summary>Source code in <code>cphttp/fsWatcher.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">async</span> <span class="k">def</span> <span class="nf">watchForFileSystemEvents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; An asynchronously interable method which yields file system change</span>
+<span class="sd">  events. &quot;&quot;&quot;</span>
+
+  <span class="c1"># Things that can throw this off:</span>
+  <span class="c1">#</span>
+  <span class="c1"># * Moving a watched directory out of the watch tree (will still</span>
+  <span class="c1">#   generate events even when outside of directory tree)</span>
+  <span class="c1">#</span>
+  <span class="c1"># * Doing two changes on a directory or something before the program</span>
+  <span class="c1">#   has a time to handle it (this will also throw off a lot of inotify</span>
+  <span class="c1">#   code, though)</span>
+  <span class="c1">#</span>
+  <span class="c1"># * Moving a watched directory within a watched directory will get the</span>
+  <span class="c1">#   wrong path.  This needs to use the cookie system to link events</span>
+  <span class="c1">#   together and complete the move properly, which can still make some</span>
+  <span class="c1">#   events get the wrong path if you get file events during the move or</span>
+  <span class="c1">#   something silly like that, since MOVED_FROM and MOVED_TO aren&#39;t</span>
+  <span class="c1">#   guaranteed to be contiguous.  That exercise is left up to the</span>
+  <span class="c1">#   reader.</span>
+  <span class="c1">#</span>
+  <span class="c1"># * Trying to watch a path that doesn&#39;t exist won&#39;t automatically</span>
+  <span class="c1">#   create it or anything of the sort.</span>
+  <span class="c1">#</span>
+  <span class="c1"># * Deleting and recreating or moving the watched directory won&#39;t do</span>
+  <span class="c1">#   anything special, but it probably should.</span>
+  <span class="c1">#</span>
+  <span class="k">async</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inotify</span><span class="p">:</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">continueWatchingFS</span> <span class="p">:</span>
+      <span class="k">return</span>
+
+    <span class="c1"># If this is a creation event, add a watch for the new path (and its</span>
+    <span class="c1"># subdirectories if any)</span>
+    <span class="c1">#</span>
+    <span class="k">if</span> <span class="n">Mask</span><span class="o">.</span><span class="n">CREATE</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">mask</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+      <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">watchAPath</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">Mask</span><span class="o">.</span><span class="n">DELETE_SELF</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">mask</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="p">:</span>
+      <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">unWatchAPath</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">watch</span><span class="p">)</span>
+
+    <span class="c1"># If there are some bits in the cpMask in the event.mask yield this</span>
+    <span class="c1"># event</span>
+    <span class="c1">#</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">cpMask</span><span class="p">:</span>
+      <span class="k">yield</span> <span class="n">event</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># Note that these events are needed for cleanup purposes.</span>
+      <span class="c1"># We&#39;ll always get IGNORED events so the watch can be removed</span>
+      <span class="c1"># from the inotify.  We don&#39;t need to do anything with the</span>
+      <span class="c1"># events, but they do need to be generated for cleanup.</span>
+      <span class="c1"># We don&#39;t need to pass IGNORED events up, because the end-user</span>
+      <span class="c1"># doesn&#39;t have the inotify instance anyway, and IGNORED is just</span>
+      <span class="c1"># used for management purposes.</span>
+      <span class="c1">#</span>
+      <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;UNYIELDED EVENT: </span><span class="si">{</span><span class="n">event</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="cphttp.reloader" class="doc doc-heading">
+        <code>reloader</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+      <p>The fileResponsePatch module injects the contents of the <code>reloaderScript</code>
+string, provided by this module, as a <code>&lt;script&gt;...&lt;/script&gt;</code> at the end of
+any HTML file's <code>&lt;head&gt;...&lt;/head&gt;</code> section.</p>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: ComputePods Simple reloading HTTP server" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              ComputePods Simple reloading HTTP server
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        &bull;
+<a href="https://github.com/lukasgeiter/mkdocs-awesome-pages-plugin/" target="_blank">MkDocs Awesome Pages</a>
+&bull;
+<a href="https://mkdocstrings.github.io/" target="_blank">MkDocStrings</a>
+&bull;
+<a href="https://github.com/fralau/mkdocs-mermaid2-plugin" target="_blank">MkDocs Mermaid2</a>
+&bull;
+<a href="https://www.mkdocs.org" target="_blank">MkDocs</a>
+
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+    
+  </body>
+</html>
